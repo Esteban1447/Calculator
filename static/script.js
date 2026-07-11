@@ -37,30 +37,48 @@ function calculator() {
         let answerd = Number(token[0]);
 
         for (let i = 1; i < token.length; i += 2) {
+          let number1 = token[i - 1];
+          let operator = token[i];
+          let number2 = token[i + 1];
+
+          if (operator == "*" || operator == "/") {
+            switch (operator) {
+              case "*":
+                answerd = number1 * number2;
+                token.splice(i - 1, 3, answerd);
+                i -= 2;
+                break;
+              case "/":
+                console.log("Entre a la division");
+                answerd = number1 / number2;
+                token.splice(i - 1, 3, answerd);
+                i -= 2;
+                break;
+              default:
+                break;
+            }
+            console.log(token);
+          }
+        }
+        answerd = Number(token[0]);
+
+        for (let i = 1; i < token.length; i += 2) {
           let operator = token[i];
           let number = Number(token[i + 1]);
 
           console.log(operator);
           console.log(number);
 
-          if ((operator = !"")) {
-            switch (operator) {
-              case "+":
-                answerd = number + Next;
-                break;
-              case "-":
-                answerd = number - answerd;
-                break;
-              case "/":
-                answerd = number / answerd;
-                break;
-              case "*":
-                answerd = number * answerd;
-                break;
-              default:
-                answerd = "No se pudo resolver";
-                break;
-            }
+          switch (operator) {
+            case "+":
+              answerd = number + answerd;
+              break;
+            case "-":
+              answerd = answerd - number;
+              break;
+            default:
+              answerd = "No se pudo resolver";
+              break;
           }
         }
 
