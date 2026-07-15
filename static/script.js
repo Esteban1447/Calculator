@@ -4,11 +4,13 @@ const token = [];
 
 let expresion = "";
 let number = "";
+const operadores = ["+", "-", "*", "/"];
 
 function calculator() {
   btns.forEach((element) => {
     element.addEventListener("click", () => {
       const value = element.textContent;
+      const last = expresion.at(-1);
 
       if (value === "C") {
         expresion = "";
@@ -18,6 +20,9 @@ function calculator() {
         token.length = 0;
         number = "";
 
+        if (operadores.includes(last)) {
+          return;
+        }
         for (const character of expresion) {
           if (!isNaN(character)) {
             number += character;
@@ -113,9 +118,24 @@ function calculator() {
 
         console.log(answerd);
         display.value = answerd;
-      } else {
-        expresion += value;
+      } else if (value === "⌫") {
+        expresion = expresion.slice(0, expresion.length - 1);
         display.value = expresion;
+      } else {
+        console.log("Ultimo: " + last);
+
+        if (expresion == "") {
+          if (operadores.includes(value)) {
+            return;
+          }
+        }
+
+        if (operadores.includes(value) && operadores.includes(last)) {
+          return;
+        } else {
+          expresion += value;
+          display.value = expresion;
+        }
       }
     });
   });
