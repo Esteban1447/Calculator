@@ -89,6 +89,8 @@ function calculator() {
 
         console.log(answerd);
         display.value = answerd;
+        expresion = String(answerd);
+
       } else if (value === "⌫") {
         expresion = expresion.slice(0, expresion.length - 1);
         display.value = expresion;
@@ -96,6 +98,9 @@ function calculator() {
         console.log("Ultimo: " + last);
 
         if (expresion == "") {
+          if (value == "."){
+            return
+          }
           if (operadores.includes(value)) {
             return;
           }
